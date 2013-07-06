@@ -1,0 +1,6 @@
+Django==1.5.1
+argparse==1.2.1
+boto==2.9.6
+distribute==0.6.34
+gunicorn==17.5
+wsgiref==0.1.2
