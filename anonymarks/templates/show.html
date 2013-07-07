@@ -1,5 +1,17 @@
 {% if not bookmarks %}
 <p>Here's where I'd put your bookmarks. If you had any.</p>
+
+<form method="post" action="/store">
+  {% csrf_token %}
+  <input type="hidden" name="hash" value="{{ hash }}">
+
+  <div><input type="text" size="30" name="name"></div>
+  <div><input type="text" size="100" name="url"></div>
+
+  <div><input type="submit" name="submit" value="Submit"></div>
+</form>
 {% else %}
-<p>You appear to have some bookmarks, but this script is too stupid to print them.</p>
+  {% for name, url in bookmarks.items %}
+    <p><a href="{{url}}">{{name}}</a></p>
+  {% endfor %}
 {% endif %}
