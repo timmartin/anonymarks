@@ -1,17 +1,18 @@
 {% if not bookmarks %}
 <p>Here's where I'd put your bookmarks. If you had any.</p>
-
-<form method="post" action="/store">
-  {% csrf_token %}
-  <input type="hidden" name="hash" value="{{ hash }}">
-
-  <div><input type="text" size="30" name="name"></div>
-  <div><input type="text" size="100" name="url"></div>
-
-  <div><input type="submit" name="submit" value="Submit"></div>
-</form>
 {% else %}
   {% for name, url in bookmarks.items %}
     <p><a href="{{url}}" rel="nofollow">{{name}}</a></p>
   {% endfor %}
 {% endif %}
+
+<h2>Add a bookmark</h2>
+<form method="post" action="/store">
+  {% csrf_token %}
+  <input type="hidden" name="hash" value="{{ hash }}">
+
+  <div>Name: <input type="text" size="20" name="name"></div>
+  <div>URL: <input type="text" size="80" name="url"></div>
+
+  <div><input type="submit" name="submit" value="Submit"></div>
+</form>
