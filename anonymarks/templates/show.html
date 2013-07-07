@@ -12,6 +12,6 @@
 </form>
 {% else %}
   {% for name, url in bookmarks.items %}
-    <p><a href="{{url}}">{{name}}</a></p>
+    <p><a href="{{url}}" rel="nofollow">{{name}}</a></p>
   {% endfor %}
 {% endif %}
