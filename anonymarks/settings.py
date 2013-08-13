@@ -1,9 +1,13 @@
 # Django settings for anonymarks project.
 
 import os.path
+from unipath import Path
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+
+PROJECT_DIR = Path(__file__).ancestor(2)
+ANONYMARKS_DIR = PROJECT_DIR.child('anonymarks')
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -47,7 +51,7 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = PROJECT_DIR + '/static_tmp'
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
@@ -55,6 +59,7 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
+    os.path.join(ANONYMARKS_DIR, 'static')
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -93,10 +98,8 @@ ROOT_URLCONF = 'anonymarks.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'anonymarks.wsgi.application'
 
-PROJECT_DIR = os.path.dirname(__file__)
-
 TEMPLATE_DIRS = (
-    os.path.join(PROJECT_DIR, 'templates')
+    os.path.join(ANONYMARKS_DIR, 'templates')
 )
 
 INSTALLED_APPS = (
