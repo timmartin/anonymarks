@@ -29,9 +29,17 @@ def show(request):
     return render(request, 'show.html', context)
 
 def store(request):
+    context = {}
+
     bookmarks_table.put_item(data={
             'hash' : request.POST['hash'],
             'name' : request.POST['name'],
             'url' : request.POST['url']})
 
-    return HttpResponseRedirect('/')
+    bookmarks = bookmarks_table.query(hash__eq=request.POST['hash'])
+
+    context['bookmarks'] = {item['name'] : item['url']
+                            for item in bookmarks}
+    context['hash'] = hash
+    context.update(csrf(request))
+    return render(request, 'show.html', context)
