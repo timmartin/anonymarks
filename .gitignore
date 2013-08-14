@@ -2,3 +2,4 @@ venv
 *.pyc
 *~
 set_environment
+static_tmp
