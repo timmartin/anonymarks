@@ -9,6 +9,7 @@ urlpatterns = patterns(
     url(r'^$', 'anonymarks.views.home'),
     url(r'^show$', 'anonymarks.views.show'),
     url(r'^store$', 'anonymarks.views.store'),
+    url(r'^delete$', 'anonymarks.views.delete'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

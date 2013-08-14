@@ -40,6 +40,20 @@ def store(request):
 
     context['bookmarks'] = {item['name'] : item['url']
                             for item in bookmarks}
-    context['hash'] = hash
+    context['hash'] = request.POST['hash']
+    context.update(csrf(request))
+    return render(request, 'show.html', context)
+
+def delete(request):
+    context = {}
+
+    bookmarks_table.delete_item(hash=request.POST['hash'],
+                                name=request.POST['name'])
+
+    bookmarks = bookmarks_table.query(hash__eq=request.POST['hash'])
+
+    context['bookmarks'] = {item['name'] : item['url']
+                            for item in bookmarks}
+    context['hash'] = request.POST['hash']
     context.update(csrf(request))
     return render(request, 'show.html', context)

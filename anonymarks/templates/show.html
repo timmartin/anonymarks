@@ -1,8 +1,17 @@
+{% load staticfiles %}
+
 {% if not bookmarks %}
 <p>Here's where I'd put your bookmarks. If you had any.</p>
 {% else %}
   {% for name, url in bookmarks.items %}
-    <p><a href="{{url}}" rel="nofollow">{{name}}</a></p>
+    <p>
+      <form method="post" action="/delete">
+	{% csrf_token %}
+	<input type="hidden" name="hash" value="{{ hash }}">
+	<input type="hidden" name="name" value="{{ name }}">
+	<input type="image" src="{% static 'img/delete.png' %}">
+      </form>
+      <a href="{{url}}" rel="nofollow">{{name}}</a></p>
   {% endfor %}
 {% endif %}
 
