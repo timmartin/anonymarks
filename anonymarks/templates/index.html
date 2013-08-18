@@ -1,9 +1,44 @@
-<h1>Anonymarks</h1>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/css/bootstrap.min.css">
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
 
-<p>We provide anonymous bookmarks. To get started, enter your passphrase here:</p>
+    <div class="navbar navbar-static-top">
+      <div class="container">
+	<div class="navbar-header">
+	  <a class="navbar-brand" href="#">Anonymarks</a>
+	</div>
+	<div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="http://static.anonymarks.net/about.html">About</a></li>
+	    <li><a href="http://static.anonymarks.net/faq.html">FAQ</a></li>
+            <li><a href="http://static.anonymarks.net/contact.html">Contact</a></li>
+	  </ul>
+	</div>
+      </div>
+    </div>
 
-<form method="post" action="/show">
-{% csrf_token %}
-<div><input type="text" name="passphrase"></div>
-<div><input type="submit" name="submit" value="Submit"></div>
-</form>
+    <div class="container">
+      <div class="jumbotron">
+	<h1>Anonymarks</h1>
+
+	<p>Bookmarks in the cloud. Access from any device,
+	anywhere. Fast, simple and anonymous.</p>
+
+	<p><a class="btn btn-primary btn-lg" href="http://static.anonymarks.net/about.html">Learn more</a></p>
+
+	<p>or just enter your passphrase to get started:</p>
+
+	<form method="post" action="/show">
+	  {% csrf_token %}
+	  <div><input type="text" name="passphrase"></div>
+	  <div><input type="submit" name="submit" value="Submit"></div>
+	</form>
+      </div>
+    </div>
+  </body>
+</html>
