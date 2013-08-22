@@ -3,7 +3,7 @@
 import os.path
 from unipath import Path
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 PROJECT_DIR = Path(__file__).ancestor(2)
