@@ -29,16 +29,23 @@
 {% if not bookmarks %}
 <p>Here's where I'd put your bookmarks. If you had any.</p>
 {% else %}
+  <table>
   {% for name, url in bookmarks.items %}
-    <p>
-      <form method="post" action="/delete">
-	{% csrf_token %}
-	<input type="hidden" name="hash" value="{{ hash }}">
-	<input type="hidden" name="name" value="{{ name }}">
-	<input type="image" src="{% static 'img/delete.png' %}">
-      </form>
-      <a href="{{url}}" rel="nofollow">{{name}}</a></p>
+    <tr>
+      <td>
+	<form method="post" action="/delete">
+	  {% csrf_token %}
+	  <input type="hidden" name="hash" value="{{ hash }}">
+	  <input type="hidden" name="name" value="{{ name }}">
+	  <input type="image" src="{% static 'img/delete.png' %}">
+	</form>
+      </td>
+      <td>
+	<a href="{{url}}" rel="nofollow">{{name}}</a>
+      </td>
+    </tr>
   {% endfor %}
+  </table>
 {% endif %}
 
 <h2>Add a bookmark</h2>
