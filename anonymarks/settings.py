@@ -1,9 +1,10 @@
 # Django settings for anonymarks project.
 
+import os
 import os.path
 from unipath import Path
 
-DEBUG = False
+DEBUG = bool(int(os.environ.get('DJANGO_DEBUG', 0)))
 TEMPLATE_DEBUG = DEBUG
 
 PROJECT_DIR = Path(__file__).ancestor(2)
@@ -17,7 +18,10 @@ MANAGERS = ADMINS
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost',
+                 'anonymarks.herokuapp.com',
+                 '.anonymarks.net',
+                 '.anonymarks.com']
 
 TIME_ZONE = 'UTC'
 
