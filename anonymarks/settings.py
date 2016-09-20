@@ -5,7 +5,6 @@ import os.path
 from unipath import Path
 
 DEBUG = bool(int(os.environ.get('DJANGO_DEBUG', 0)))
-TEMPLATE_DEBUG = DEBUG
 
 PROJECT_DIR = Path(__file__).ancestor(2)
 ANONYMARKS_DIR = PROJECT_DIR.child('anonymarks')
@@ -80,13 +79,6 @@ STATICFILES_FINDERS = (
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '=w=)2e^e8o(-i%th-7hohjsm$wzr*1ju#_^otq8tl7*z!$lhcx'
 
-# List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
-)
-
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -102,9 +94,10 @@ ROOT_URLCONF = 'anonymarks.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'anonymarks.wsgi.application'
 
-TEMPLATE_DIRS = (
-    os.path.join(ANONYMARKS_DIR, 'templates'),
-)
+TEMPLATES = [{
+    'BACKEND': 'django.template.backends.django.DjangoTemplates',
+    'DIRS': [os.path.join(ANONYMARKS_DIR, 'templates')],
+}]
 
 INSTALLED_APPS = (
     'django.contrib.auth',

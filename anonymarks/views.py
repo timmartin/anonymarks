@@ -2,7 +2,6 @@ import os
 import hashlib
 
 from django.shortcuts import render
-from django.core.context_processors import csrf
 from django.http import HttpResponseRedirect
 
 from boto.dynamodb2.table import Table
@@ -25,7 +24,6 @@ def show(request):
                             for item in bookmarks}
     context['hash'] = hash_obj.hexdigest()
 
-    context.update(csrf(request))
     return render(request, 'show.html', context)
 
 def store(request):
@@ -41,7 +39,6 @@ def store(request):
     context['bookmarks'] = {item['name'] : item['url']
                             for item in bookmarks}
     context['hash'] = request.POST['hash']
-    context.update(csrf(request))
     return render(request, 'show.html', context)
 
 def delete(request):
@@ -55,5 +52,4 @@ def delete(request):
     context['bookmarks'] = {item['name'] : item['url']
                             for item in bookmarks}
     context['hash'] = request.POST['hash']
-    context.update(csrf(request))
     return render(request, 'show.html', context)
