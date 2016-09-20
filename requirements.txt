@@ -1,4 +1,4 @@
-Django==1.6.*
+Django==1.7.*
 argparse==1.2.1
 boto==2.9.6
 gunicorn==17.5

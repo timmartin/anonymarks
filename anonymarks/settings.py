@@ -103,7 +103,7 @@ ROOT_URLCONF = 'anonymarks.urls'
 WSGI_APPLICATION = 'anonymarks.wsgi.application'
 
 TEMPLATE_DIRS = (
-    os.path.join(ANONYMARKS_DIR, 'templates')
+    os.path.join(ANONYMARKS_DIR, 'templates'),
 )
 
 INSTALLED_APPS = (
