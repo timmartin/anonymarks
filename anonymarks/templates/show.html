@@ -37,7 +37,7 @@
 	  {% csrf_token %}
 	  <input type="hidden" name="hash" value="{{ hash }}">
 	  <input type="hidden" name="name" value="{{ name }}">
-	  <input type="image" src="{% static 'img/delete.png' %}">
+	  <button class="btn"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
 	</form>
       </td>
       <td>
@@ -53,10 +53,22 @@
   {% csrf_token %}
   <input type="hidden" name="hash" value="{{ hash }}">
 
-  <div>Name: <input type="text" size="20" name="name"></div>
-  <div>URL: <input type="text" size="80" name="url"></div>
+  <div class="input-group">
+    <input type="text"
+           class="form-control"
+           size="40"
+           name="name"
+           placeholder="Site name">
+  </div>
+  <div class="input-group">
+    <input type="text"
+           class="form-control"
+           size="80"
+           name="url"
+           placeholder="URL">
+  </div>
 
-  <div><input type="submit" name="submit" value="Submit"></div>
+  <div><input type="submit" class="btn btn-primary" name="submit" value="Submit"></div>
 </form>
 
 </div>
