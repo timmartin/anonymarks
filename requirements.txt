@@ -1,5 +1,5 @@
 Django~=2.0
 argparse==1.2.1
-boto==2.49.0
+boto3==1.24.32
 gunicorn==17.5
 Unipath==1.0

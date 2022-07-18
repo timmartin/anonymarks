@@ -1,10 +1,11 @@
 import hashlib
 
+import boto3
+from boto3.dynamodb.conditions import Key
 from django.shortcuts import render
 
-from boto.dynamodb2.table import Table
-
-bookmarks_table = Table('bookmarks')
+dynamodb = boto3.resource('dynamodb')
+bookmarks_table = dynamodb.Table('bookmarks')
 
 def home(request):
     context = {}
@@ -16,7 +17,9 @@ def show(request):
     hash_obj = hashlib.sha1()
     hash_obj.update(request.POST['passphrase'])
 
-    bookmarks = bookmarks_table.query(hash__eq=hash_obj.hexdigest())
+    bookmarks = bookmarks_table.query(
+        KeyConditionExpression=Key('hash').eq(hash_obj.hexdigest())
+    )
 
     context['bookmarks'] = {item['name'] : item['url']
                             for item in bookmarks}
@@ -27,12 +30,17 @@ def show(request):
 def store(request):
     context = {}
 
-    bookmarks_table.put_item(data={
+    bookmarks_table.put_item(
+        Item={
             'hash' : request.POST['hash'],
             'name' : request.POST['name'],
-            'url' : request.POST['url']})
+            'url' : request.POST['url']
+        }
+    )
 
-    bookmarks = bookmarks_table.query(hash__eq=request.POST['hash'])
+    bookmarks = bookmarks_table.query(
+        KeyConditionExpression=Key('hash').eq(request.POST['hash'])
+    )
 
     context['bookmarks'] = {item['name'] : item['url']
                             for item in bookmarks}
@@ -45,7 +53,9 @@ def delete(request):
     bookmarks_table.delete_item(hash=request.POST['hash'],
                                 name=request.POST['name'])
 
-    bookmarks = bookmarks_table.query(hash__eq=request.POST['hash'])
+    bookmarks = bookmarks_table.query(
+        KeyConditionExpression=Key('hash').eq(request.POST['hash'])
+    )
 
     context['bookmarks'] = {item['name'] : item['url']
                             for item in bookmarks}
