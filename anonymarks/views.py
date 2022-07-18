@@ -1,8 +1,6 @@
-import os
 import hashlib
 
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
 
 from boto.dynamodb2.table import Table
 
