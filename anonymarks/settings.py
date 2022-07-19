@@ -2,6 +2,7 @@
 
 import os
 import os.path
+import sys
 from unipath import Path
 
 DEBUG = bool(int(os.environ.get('DJANGO_DEBUG', 0)))
@@ -130,6 +131,11 @@ LOGGING = {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
+        },
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'stream': sys.stdout
         }
     },
     'loggers': {
@@ -138,5 +144,10 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': True,
+        }
     }
 }
