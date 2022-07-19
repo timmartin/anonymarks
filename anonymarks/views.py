@@ -17,12 +17,12 @@ def show(request):
     hash_obj = hashlib.sha1()
     hash_obj.update(request.POST['passphrase'].encode('utf-8'))
 
-    bookmarks = bookmarks_table.query(
+    response = bookmarks_table.query(
         KeyConditionExpression=Key('hash').eq(hash_obj.hexdigest())
     )
 
     context['bookmarks'] = {item['name'] : item['url']
-                            for item in bookmarks}
+                            for item in response['Items']}
     context['hash'] = hash_obj.hexdigest()
 
     return render(request, 'show.html', context)
@@ -38,12 +38,12 @@ def store(request):
         }
     )
 
-    bookmarks = bookmarks_table.query(
+    response = bookmarks_table.query(
         KeyConditionExpression=Key('hash').eq(request.POST['hash'])
     )
 
     context['bookmarks'] = {item['name'] : item['url']
-                            for item in bookmarks}
+                            for item in response['Items']}
     context['hash'] = request.POST['hash']
     return render(request, 'show.html', context)
 
@@ -53,11 +53,11 @@ def delete(request):
     bookmarks_table.delete_item(hash=request.POST['hash'],
                                 name=request.POST['name'])
 
-    bookmarks = bookmarks_table.query(
+    response = bookmarks_table.query(
         KeyConditionExpression=Key('hash').eq(request.POST['hash'])
     )
 
     context['bookmarks'] = {item['name'] : item['url']
-                            for item in bookmarks}
+                            for item in response['Items']}
     context['hash'] = request.POST['hash']
     return render(request, 'show.html', context)
