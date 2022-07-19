@@ -50,8 +50,12 @@ def store(request):
 def delete(request):
     context = {}
 
-    bookmarks_table.delete_item(hash=request.POST['hash'],
-                                name=request.POST['name'])
+    bookmarks_table.delete_item(
+        Key={
+            'hash': request.POST['hash'],
+            'name': request.POST['name']
+        }
+    )
 
     response = bookmarks_table.query(
         KeyConditionExpression=Key('hash').eq(request.POST['hash'])
