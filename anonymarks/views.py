@@ -15,7 +15,7 @@ def show(request):
     context = {}
 
     hash_obj = hashlib.sha1()
-    hash_obj.update(request.POST['passphrase'])
+    hash_obj.update(request.POST['passphrase'].encode('utf-8'))
 
     bookmarks = bookmarks_table.query(
         KeyConditionExpression=Key('hash').eq(hash_obj.hexdigest())
